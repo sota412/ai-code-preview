@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Preview - HTML/CSS/JS Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <h1>🤖 AI Code Preview</h1>
+            <div class="header-actions">
+                <select id="apiSelect" class="api-select">
+                    <option value="openai">OpenAI</option>
+                    <option value="mock">デモ (ローカル)</option>
+                </select>
+                <input type="text" id="apiKey" class="api-key-input" placeholder="APIキーを入力（オプション）">
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- 左側: AI入力 + エディタ -->
+            <div class="left-panel">
+                <div class="ai-input-section">
+                    <h2>AI Prompt</h2>
+                    <textarea 
+                        id="aiPrompt" 
+                        class="ai-prompt-input"
+                        placeholder="例: 綺麗な青いボタンを作ってください。ホバー時に拡大します。"
+                    ></textarea>
+                    <div class="button-group">
+                        <button id="generateBtn" class="btn btn-primary">✨ 生成</button>
+                        <button id="clearBtn" class="btn btn-secondary">クリア</button>
+                    </div>
+                </div>
+
+                <div class="editor-section">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="html">HTML</button>
+                        <button class="tab-btn" data-tab="css">CSS</button>
+                        <button class="tab-btn" data-tab="js">JS</button>
+                    </div>
+                    <div id="editorContainer" class="editor-container"></div>
+                </div>
+
+                <div class="status-section">
+                    <div id="status" class="status-message"></div>
+                </div>
+            </div>
+
+            <!-- 右側: プレビュー -->
+            <div class="right-panel">
+                <div class="preview-header">
+                    <h2>Preview</h2>
+                    <button id="refreshBtn" class="btn btn-small">🔄 更新</button>
+                </div>
+                <iframe 
+                    id="previewFrame" 
+                    class="preview-frame"
+                    sandbox="allow-scripts allow-same-origin allow-popups"
+                    title="Code Preview"
+                ></iframe>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>AI がコードを生成中...</p>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="editor.js"></script>
+    <script src="preview.js"></script>
+    <script src="ai-handler.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
